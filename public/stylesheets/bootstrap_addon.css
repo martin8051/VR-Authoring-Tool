@@ -1,0 +1,56 @@
+#objFileListContainer {
+    margin-bottom: 1rem;
+}
+
+.nav-item .nav-link {
+    color: #e4e8ee !important;
+}
+
+.nav-item .nav-link:hover,
+.nav-item .nav-link.active {
+    color: #73a4f0 !important;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-control {
+    color: #495057 !important;
+}
+
+.hint-message {
+    font-size: 0.8rem;
+    color: #ffffff !important;
+}
+
+.upload-list-item {
+    font-size: .8rem;
+}
+
+#confirmChangesModal .modal-header,
+#confirmChangesModal .modal-body {
+    color: #000 !important;
+}
+
+.modal .modal-header,
+.modal .modal-body h5,
+.modal label {
+    color: #ffffffe0;
+}
+
+.modal .modal-content {
+    background-color: #03182b;
+}
+
+.form-control {
+    background-color: #fffffff0;
+}
+
+#objFileList {
+    margin-top: 10px;
+}
+
+.table.content-white {
+    color: #ffffff;
+}
