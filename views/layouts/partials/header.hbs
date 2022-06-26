@@ -1,0 +1,24 @@
+<ul class="nav flex-column py-5">
+    <li class="nav-item">
+        <a class="nav-link" id="nav-dashboard" aria-current="page" href="/dashboard/{{userId}}">
+            <i class="bi bi-grid-1x2 me-3"></i>Dashboard
+        </a>
+    </li>
+    {{#ifEquals accountType 'teacher'}}
+    <li class="nav-item">
+        <a class="nav-link" id="nav-library" aria-current="page" href="/dashboard/{{userId}}/library">
+            <i class="bi bi-folder me-3"></i>Library
+        </a>
+    </li>
+    {{/ifEquals}}
+    <li class="nav-item">
+        <a class="nav-link" id="nav-settings" href="#" data-bs-toggle="modal" data-bs-target="#accountSettings">
+            <i class="bi bi-gear me-3"></i>Settings
+        </a>
+    </li>
+    <li id="logout-sidebar-button" class="nav-item">
+        <a class="nav-link" href="/sign-in">
+            <i class="bi bi-box-arrow-in-right me-3"></i>Log out
+        </a>
+    </li>
+</ul>
