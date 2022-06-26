@@ -1,0 +1,138 @@
+<div class="container py-5">
+    <div class="row my-5">
+        <h1 class="text-white"><span id="greetingMsg"></span> <span id="userFirstName"></span></h1>
+    </div>
+    <div>
+        {{#ifEquals accountType 'teacher'}}
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createANewLabModal">
+          <i class="bi bi-plus me-2"></i>Create a lab
+        </button>
+        <!--Create Lab Modal -->
+        <div class="modal fade" id="createANewLabModal" data-bs-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+      		  <div class="modal-content">
+      			  <div class="modal-header">
+                <h2 class="modal-title" id="createANewLabModalLabel">Lab Title</h2>
+              </div>
+              <div class="modal-body">
+                <form id="labFormModal">
+                  <div class="form-group">
+                    <label for="titleInput">Title</label>
+                      <input type="text" class="form-control" id="titleInput" placeholder="Biology 101 Frog Lab" required>
+                    </div>
+                    <div class="form-group">
+        							<label for="timeInput">Start time</label>
+        							<input type="time" class="form-control" id="timeInput" required>
+        						</div>
+        						<div class="form-group">
+        							<label for="dateInput">Start date</label>cd 
+        							<input type="date" class="form-control" id="dateInput" required>
+        						</div>
+        						<div class="form-group">
+        							<label for="sceneSelectInput">VR scene</label>
+        							<select class="form-control" id="sceneSelectInput" required>
+        								<option value="">Select a scene</option>
+        								<option value="chemistry">Chemistry lab</option>
+        								<option value="biology">Biology lab</option>
+        								<option value="physics">Physics lab</option>
+        							</select>
+      							 </div>
+      				  	</form>  
+      					 </div>
+      				  <div class="modal-footer">
+      					  <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
+      						<button type="button" class="btn btn-primary" id="saveNewLabButton">Save lab</button>
+      					</div>
+      				</div>
+      			</div>
+      		</div>
+          
+            <!--Update Lab Modal -->
+            <div class="modal fade" id="updateLabModal" data-lab-id="" data-bs-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h2 class="modal-title" id="updateLabModalLabel">Lab Title</h2>
+                        </div>
+                        <div class="modal-body">
+                            <form id="updateLabFormModal">
+                                <div class="form-group">
+                                    <label for="titleInput">Title</label>
+                                      <input type="text" class="form-control" id="updateTitleInput" placeholder="Biology 101 Frog Lab" required>
+                                </div>
+                                <div class="form-group">
+                					<label for="timeInput">Start time</label>
+                					<input type="time" class="form-control" id="updateTimeInput" required>
+                				</div>
+                				<div class="form-group">
+                					<label for="dateInput">Start date</label>cd 
+                					<input type="date" class="form-control" id="updateDateInput" required>
+                				</div>
+                				<div class="form-group">
+                					<label for="sceneSelectInput">VR scene</label>
+                					<select class="form-control" id="updateSceneSelectInput" required>
+                						<option value="">Select a scene</option>
+                						<option value="chemistry">Chemistry lab</option>
+                						<option value="biology">Biology lab</option>
+                						<option value="physics">Physics lab</option>
+                					</select>
+                  				 </div>
+                  	  	    </form>  
+                  		 </div>
+                  	  <div class="modal-footer">
+                  		  <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
+                  			<button type="button" class="btn btn-primary" id="updateLabButton">Update lab</button>
+                  		</div>
+                  	</div>
+                </div>
+            </div>
+        {{/ifEquals}}
+        
+        {{#if labs.length}}
+            <table class="table content-white mt-4">
+                <thead>
+                    <tr>
+                        <th scope="col">Time</th>
+                        <th scope="col">Class</th>
+                        <th scope="col">Teacher</th>
+                        <th scope="col">Actions</th>
+                       
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#./labs}}
+                    <tr id={{this._id}}>
+                        <td class="align-middle">{{this.labTime}}</td>
+                        <td class="align-middle">{{this.labTitle}}</td>
+                        <td class="align-middle">{{this.teacher.fullName}}</td>
+                        <td class="align-middle">
+                            <a target="_blank" href="lab/{{this.labUrl}}" class="btn btn-primary btn-sm mx-1 my-1" role="button">Join</a>
+                                
+                            {{#ifEquals ../accountType 'teacher'}}
+                            <button class="updateButton btn btn-outline-primary btn-sm mx-1 my-1" data-title="{{this.labTitle}}" data-time="{{this.labTime}}" data-date="{{this.labDate}}" data-scene="{{this.labVRScene}}" data-id="{{this._id}}" data-bs-toggle="modal" data-bs-target="#updateLabModal">Update</button>
+                            <button class="deleteButton btn btn-outline-danger btn-sm mx-1 my-1" data-title="{{this.labTitle}}" data-id="{{this._id}}">Delete</button>
+                            {{/ifEquals}}
+                        </td>
+        
+                    </tr>
+                    {{/./labs}}
+                </tbody>
+            </table>
+        {{else}}
+        <div class="mt-5">
+            {{#ifEquals accountType 'teacher'}}
+            <p class="text-white">You haven't created any labs, yet!</p>
+            {{else}}
+            <p class="text-white">You're in luck. No labs, yet!</p>
+            {{/ifEquals}}
+        </div>
+        {{/if}}
+    </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+        getFirstName("{{fullName}}");
+    });
+</script>

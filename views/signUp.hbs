@@ -1,0 +1,360 @@
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400&display=swap');
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        background: #03182b;
+    }
+
+    /* before*/
+
+    body::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(#c73c6a, #eb0069);
+        clip-path: polygon(30% 10%, 50% 40%, 30% 75%);
+    }
+
+    /* after*/
+
+    body::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(#34d0ff, #1928f5);
+        clip-path: circle(20% at 70% 75%);
+    }
+
+    .popup .content {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -150%) scale(0);
+        width: 400px;
+        height: 100%; /* 600px; */
+        z-index: 2;
+        text-align: center;
+        padding: 20px;
+        border-radius: 20px;
+        backdrop-filter: blur(15px);
+        border-top: 1px solid rgba(255, 255, 255, 0.2);
+        border-left: 1px solid rgba(255, 255, 255, 0.2);
+        box-shadow: 5px 5px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .popup .close-btn {
+        position: absolute;
+        right: 20px;
+        top: 20px;
+        width: 50px;
+        height: 50px;
+        color: white;
+        font-size: 30px;
+        border-radius: 60%;
+        padding: 2px 5px 7px 5px;
+        backdrop-filter: blur(15px);
+        border-top: 1px solid rgba(255, 255, 255, 0.2);
+        border-left: 1px solid rgba(255, 255, 255, 0.2);
+        box-shadow: 5px 5px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .popup.active .content {
+        transition: all 300ms ease-in-out;
+        transform: translate(-50%, -50%) scale(1);
+    }
+    
+    .content .input-field input,
+    .content .input-field select {
+        color: white;
+    }
+    
+    .content .input-field select option {
+        background-color: rgba(0, 0, 0, 0.5);
+    }    
+
+    h1 {
+        text-align: center;
+        font-size: 32px;
+        font-weight: 600;
+        padding-top: 20px;
+        padding-bottom: 10px;
+        color: white;
+    }
+
+    a {
+        font-weight: 600;
+        color: white;
+        text-decoration: none;
+    }
+    
+    a:hover {
+        color: #ece6e8 !important;
+    }
+
+    .input-field .validate {
+        padding: 20px;
+        font-size: 16px;
+        border-radius: 10px;
+        border: none;
+        margin-bottom: 15px;
+        background: rgba(255, 255, 255, 0.05);
+        border-top: 1px solid rgba(255, 255, 255, 0.2);
+        border-left: 1px solid rgba(255, 255, 255, 0.2);
+        box-shadow: 5px 5px 30px rgba(0, 0, 0, 0.2);
+        outline: none;
+    }
+
+    .first-button {
+
+        font-size: 18px;
+        font-weight: 500;
+        padding: 30px 50px;
+        border-radius: 40px;
+        border: none;
+        position: absolute;
+        top: 50%;
+        left: 20%;
+        color: white;
+        transform: translate(-50%, -50%);
+        backdrop-filter: blur(15px);
+        background: rgba(255, 255, 255, 0.05);
+        border-top: 1px solid rgba(255, 255, 255, 0.2);
+        border-left: 1px solid rgba(255, 255, 255, 0.2);
+        box-shadow: 5px 5px 30px rgba(0, 0, 0, 0.2);
+
+        outline: none;
+    }
+
+    .first-button:active {
+        background: rgba(255, 255, 255, 0.05);
+        box-shadow: 5px 5px 10px #262626,
+        -5px -5px 10px #262626;
+        border: none;
+    }
+
+    .second-button {
+
+        font-size: 18px;
+        font-weight: 500;
+        margin-top: 20px;
+        padding: 20px 30px;
+        border-radius: 40px;
+        border: none;
+        color: white;
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(15px);
+        border-top: 1px solid rgba(255, 255, 255, 0.2);
+        border-left: 1px solid rgba(255, 255, 255, 0.2);
+        box-shadow: 5px 5px 30px rgba(0, 0, 0, 0.2);
+        transition: box-shadow .35s ease !important;
+        outline: none;
+    }
+
+    .second-button:active {
+        background: rgba(255, 255, 255, 0.05);
+
+        border: none;
+        outline: none;
+    }
+
+    p {
+        color: #bfc0c0;
+        font-size: 0.9rem;
+        margin: 20px 0;
+    }
+    
+    .custom-container {
+        max-width: 1140px;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-content: space-between;
+    }
+    
+    .signup-form {
+        position: relative;
+        width: 400px;
+        height: 700px;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content:space-between;
+    }
+    
+    .toast {
+        position: relative;
+        margin-bottom: 1rem;
+        width: auto;
+        background-color: #fff0;
+        transition: background-color;
+    }
+    
+    .toast .toast-body {
+        color: white;
+    }
+    
+    .button-container {
+        position: relative;
+        z-index: 999;
+        display: flex;
+        flex-direction: column;
+        padding: 15px 40px;
+    }
+    
+    .bg-error {
+        background-color: #9b2c368f !important;
+        transition: background-color ease-in-out;
+    }
+    
+    .bg-successfully-created {
+        background-color: #2a9742ab !important; /*#299140b5 !important;*/
+        transition: background-color ease-in-out;
+    }
+</style>
+<div class="custom-container">
+    <div id="toastNotification" class="toast align-items-center hide" role="alert" aria-live="assertive" aria-atomic="true" data-bs-animation="true" data-bs-autohide="true" data-bs-delay="6000">
+        <div class="d-flex">
+            <div class="toast-body">
+            </div>
+        </div>
+    </div>
+    <div class="signup-form">
+        <form id="signUpForm">
+            <div class="container">
+                <div class="popup active" id="popup-1">
+                    <div class="content">
+                        {{!--<div class="close-btn" onclick="togglePopup()">x</div>--}}
+                        <h1>Sign Up</h1>
+                        <div class="input-field"><input type="text" name="fullName" id="fullNameInput" class="validate" placeholder="Enter Full Name" class="validate" required></div>
+                        <div class="input-field"><input type="text" placeholder="Enter Email" name="emailAddress" id="emailInput" class="validate" value="{{email}}" required></div>
+                        <div class="input-field"><input type="password" placeholder="Enter Password" name="password" id="pswInput" required class="validate"></div>
+                        <div class="input-field"><input type="password" placeholder="Confirm Password" name="confirmPassword" id="confirmPswInput" required class="validate"></div>
+                        <div class="input-field">
+                            <select placeholder="Account Type" name="accountType" id="accountTypeSelection" class="validate" required>
+        	                    <option value="student">Student</option>
+                                <option value="teacher">Teacher</option>
+        	                </select>
+                        </div>
+                    </div>
+                </div>
+                {{!--<button onclick="togglePopup()" class="first-button">Sign Up</button>--}}
+                <script>
+                    // function togglePopup() {
+                    //     document.getElementById("popup-1")
+                    //         .classList.toggle("active");
+                    // }
+                </script>
+            </div>
+        </form>
+        <div class="button-container">
+            <button class="second-button" id="signUpButton">Sign Up</button>
+            <p class="text-center">Already have an account? <a href="/sign-in">Sign in</a></p>
+        </div>
+    </div>
+</div>
+
+<script>
+    function signUp()
+    {
+        let dataToBeSent= {};
+
+        let password = "";
+        let cPassword = "";
+        
+        // handling empty input fields
+        // focus on input that needs to filled out
+        for(inpt of (document.getElementById('signUpForm').elements))
+        {
+            if(inpt.value.length === 0 && inpt.value == "") {
+                $(`#${inpt.id}`).focus();
+                break;
+            }
+            else 
+            {
+                switch(inpt.name)
+                {
+                    case "fullName":
+                        dataToBeSent.fullName = inpt.value;
+                        break;
+                    case "emailAddress":
+                        dataToBeSent.email = inpt.value;
+                        break;
+                    case "password":
+                        dataToBeSent.password = inpt.value;
+                        password = inpt.value;
+                        break;
+                    case "confirmPassword":
+                        cPassword = inpt.value;
+                        break;
+                    case "accountType":
+                        dataToBeSent.accountType = inpt.value;
+                        break;
+                    default:
+                        break;
+                }   
+            }
+        }
+        
+        
+        if(Object.keys(dataToBeSent).length == 4 && password === cPassword)
+        {
+            $.ajax({
+                url: '/sign-up',
+                type: 'POST',
+                cache: false,
+                contentType: 'application/json',
+                dataType: 'json',
+                data: JSON.stringify(dataToBeSent)
+            })
+            .done(function(res, textStatus, xhr) {
+                // console.log(res.signedUp);
+                if(res.signedUp)
+                {
+                    $('.toast').addClass('bg-successfully-created');
+                    $('.toast-body').text(res.message);
+                    $('.toast').toast('show');
+                    $('#signUpForm').trigger('reset');
+                    setTimeout(function(){
+                        window.location.replace(res.redirect);
+                    }, 2000);
+                }
+                else 
+                {
+                    $('.toast').addClass('bg-error');
+                    $('.toast-body').text(res.message);
+                    $('.toast').toast('show');   
+                }
+            })
+            .fail(function(res) {
+                console.log(res);
+            });   
+        }
+        else if(password !== cPassword) {
+            $('.toast').addClass('bg-error');
+            $('.toast-body').text("Passwords do not match.");
+            $('.toast').toast('show');
+            $('#confirmPswInput').focus();
+        }
+    }
+    
+    $(document).ready(function() {
+        $('#signUpButton').click(signUp);
+        
+        // trigger during the hide of the toast notification
+        // remove any added background color class. ie. bg-primary, bg-successfully-created
+        $('#toastNotification').on('hide.bs.toast', function() {
+            const classLst = ['bg-error', 'bg-successfully-created'];
+            $(this)[0].classList.remove(...classLst);
+        });
+    });
+</script>

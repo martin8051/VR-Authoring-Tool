@@ -1,0 +1,91 @@
+      <!--Martin's code-->
+      {{!--<div class="form-group">--}}
+						{{!--		<label for="inputUploadObjFiles">Upload 3D object files</label>--}}
+						{{!--		<input type="file" class="form-control" id="inputUploadObjFiles" aria-describedby="inputGroupFileAddon01" accept=".obj, .mtl" multiple>--}}
+						{{!--	</div>--}}
+						{{!--	<div id="objFileListContainer" class="">--}}
+						{{!--		<button class="btn btn-sm btn-light" id="removeFilesButton" type="button" disabled hidden></button>--}}
+						{{!--		<ul id="objFileList" class="list-group list-group-flush"></ul>--}}
+						{{!--	</div>--}}
+						{{!--	<p class="text-break hint-message"><b>Important!</b> Make sure both the ( .mtl ) file and the corresponding ( .obj ) file have the same name. <i>i.e. chair.obj & chair.mtl</i></p>--}}
+						<!--Martin's Code-->
+      {{!--<div class="container">--}}
+      {{!--  <div class="row">--}}
+          <div class="col-md-6 m-auto fixed-top">
+            <h1 class="text-center display-4 my-4"><font color="ffffff">Mongo File Uploads</h1>
+            <form id="uploadForm" action="/upload" method="POST" enctype="multipart/form-data">
+              <div class="custom-file mb-3">
+                <input type="file" name="file" id="file" class="custom-file-input">
+                <label for="file" class="custom-file-label">Choose File</label>
+              </div>
+              <input type="submit" value="Submit" class="btn btn-primary btn-block">
+                  <br></br>
+              
+                    <table class="table">
+                  <thead>
+                      <tr>
+                          <th scope="col"><font color="ffffff">File</font></th>
+                          <th scope="col"><font color="ffffff">Upload Date</font></th>
+                          
+                          <th scope="col"><font color="ffffff">Actions</font></th>
+                         
+                      </tr>
+                  </thead>
+                  <tbody>
+                      {{#labs}}
+                          <tr>
+      
+                              <td><font color="ffffff">{{this.labTime}}</font></td>
+                              <td><font color="ffffff">{{this.labTitle}}</font></td>
+                              <td><font color="ffffff">{{this.labTitle}}</font></td>
+                              <td>
+                                  <a href={{this.labUrl}} class="btn btn-primary btn-sm" role="button">Join lab</a>
+                            
+                                  <a href={{this.labUrl}} class="btn btn-outline-primary btn-sm" role="button">Update</a>
+                                  <a href={{this.labUrl}} class="btn btn-danger btn-sm" role="button">Delete</a>
+                              
+                              </td>
+      
+                          </tr>
+                      {{/labs}}
+                  </tbody>
+              </table>
+            {{!--</form>--}}
+            {{!--<hr>--}}
+            {{!--<% if(files){ %>--}}
+            {{!--  <% files.forEach(function(file) { %>--}}
+            {{!--    <div class="card card-body mb-3">--}}
+            {{!--      <% if(file.isImage) { %>--}}
+            {{!--        <img src="image/<%= file.filename %>" alt="">--}}
+            {{!--        <% } else { %>--}}
+            {{!--          <%= file.filename %>--}}
+            {{!--            <% } %>--}}
+            {{!--              <form method="POST" action="/libraries/<%= file._id %>?_method=DELETE">--}}
+            {{!--                <button class="btn btn-danger btn-block mt-4">Delete</button>--}}
+            {{!--              </form>--}}
+            {{!--    </div>--}}
+            {{!--    <% }) %>--}}
+            {{!--      <% } else { %>--}}
+            {{!--        <p>No files to show</p>--}}
+            {{!--        <% } %>--}}
+            
+          </div>
+          
+      {{!--  </div>--}}
+      {{!--</div>--}}
+    
+{{!--      <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"--}}
+{{!--        crossorigin="anonymous"></script>--}}
+{{!--      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"--}}
+{{!--        crossorigin="anonymous"></script>--}}
+{{!--      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"--}}
+{{!--        crossorigin="anonymous"></script>--}}
+{{!--    </body>--}}
+  {{!--</div>--}}
+{{!--</body>--}}
+
+<script>
+  $(document).ready(function() {
+    $("#uploadForm").attr('action', `${window.location.pathname}/upload`);
+  });
+</script>
