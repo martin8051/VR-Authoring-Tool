@@ -1,0 +1,11 @@
+# Exclude node modules
+node_modules/
+
+# Exclude any .swp files
+*.swp
+
+# Exclude .env file
+.env
+
+# Exclude objects files
+public/assets/
